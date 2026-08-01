@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Monastery360 is an interactive Buddhist monastery tourism and cultural heritage platform for Sikkim, India." />
+  <title>Monastery360 — Sikkim Monastery Tourism Platform</title>
+
+  <!-- Prevent flash of unstyled theme on initial load -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem("mv-theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts: Fraunces (serif) & Inter (sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Glassmorphism CSS System -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-app text-main transition-colors duration-200">
+
+  <!-- AUTHENTIC 8-SPOKE DHARMACHAKRA CANVAS BACKGROUND -->
+  <canvas id="bg-3d-canvas"></canvas>
+
+  <!-- APP CONTENT WRAPPER -->
+  <div class="app-content">
+
+    <!-- Fixed Top Brand Stripe Header -->
+    <div class="brand-stripe"></div>
+
+    <!-- GLASSMORPHISM HEADER COMPONENT -->
+    <header class="border-b border-theme bg-surface/85 backdrop-blur-md sticky top-0 z-30 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 flex-wrap">
+        
+        <!-- Site Title & Subtitle -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-accent text-surface flex items-center justify-center font-bold text-xl shadow-md">
+            ☸
+          </div>
+          <div>
+            <h1 id="ui-site-title" class="text-2xl font-bold font-heading text-main tracking-tight leading-none">
+              Monastery360
+            </h1>
+            <p id="ui-site-sub" class="text-xs text-muted font-medium mt-1">
+              Sikkim monastery tourism & heritage platform
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Side Controls: Multi-Language & Theme Toggle -->
+        <div class="flex items-center gap-3">
+          
+          <!-- MULTI-LANGUAGE SELECTOR DROPDOWN -->
+          <select 
+            id="lang-select" 
+            aria-label="Select Language"
+            class="p-2 px-3 rounded-xl border border-theme bg-app/90 backdrop-blur text-main text-xs font-semibold hover:border-accent cursor-pointer transition-colors shadow-sm focus:outline-none"
+          >
+            <option value="en">🇬🇧 English</option>
+            <option value="hi">🇮🇳 हिंदी (Hindi)</option>
+            <option value="ne">🇳🇵 नेपाली (Nepali)</option>
+            <option value="sip">🏔️ ལྷོ་སྐད (Sikkimese/Bhutia)</option>
+            <option value="fr">🇫🇷 Français (French)</option>
+            <option value="zh">🇨🇳 中文 (Chinese)</option>
+            <option value="ja">🇯🇵 日本語 (Japanese)</option>
+            <option value="dz">🇧🇹 རྫོང་ཁ (Bhutani/Dzongkha)</option>
+          </select>
+
+          <!-- Theme Toggle Button -->
+          <button 
+            id="theme-toggle-btn"
+            type="button"
+            aria-label="Toggle light and dark theme"
+            class="p-2 px-3 rounded-xl border border-theme bg-app/90 backdrop-blur text-main hover:border-accent transition-colors flex items-center gap-2 shadow-sm"
+          >
+            <!-- Populated by theme.js -->
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+      <!-- HERO SECTION WITH INTERACTIVE PRAYER WHEEL -->
+      <section class="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+        <div class="brand-stripe absolute top-0 left-0 right-0"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+          
+          <div class="lg:col-span-2 space-y-3">
+            <span id="ui-portal-tag" class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-app/90 border border-theme text-accent shadow-sm">
+              🏛️ Sikkim Tourism Govt. Heritage Portal • SIH 2026
+            </span>
+            <h2 id="ui-hero-title" class="text-3xl sm:text-4xl font-bold font-heading text-main leading-tight">
+              Explore sacred Buddhist heritage
+            </h2>
+            <p id="ui-hero-desc" class="text-muted text-sm sm:text-base leading-relaxed max-w-2xl">
+              Discover centuries-old monasteries across Sikkim, check live traffic forecasts, spin the virtual prayer wheel, and plan your pilgrimage.
+            </p>
+
+            <!-- INTERACTIVE TIBETAN PRAYER WHEEL WIDGET -->
+            <div class="p-4 rounded-xl border border-theme bg-app/80 backdrop-blur flex items-center justify-between gap-4 max-w-lg shadow-sm mt-4">
+              <div class="flex items-center gap-3">
+                <div id="interactive-wheel-icon" class="w-12 h-12 rounded-full bg-accent text-surface flex items-center justify-center text-2xl font-bold transition-transform duration-300 shadow cursor-pointer">
+                  ☸
+                </div>
+                <div>
+                  <span class="text-xs font-bold text-main block">Spin Tibetan Prayer Wheel</span>
+                  <span class="text-[11px] text-muted block">Om Mani Padme Hum &bull; <strong id="spin-count-display" class="text-accent font-mono">0</strong> spins</span>
+                </div>
+              </div>
+              <button 
+                type="button" 
+                id="spin-wheel-btn"
+                class="px-3 py-1.5 rounded-lg bg-accent text-surface font-semibold text-xs hover:opacity-95 shadow transition-all active:scale-95"
+              >
+                Spin Wheel 🙏
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Tracker Glass Card -->
+          <div class="bg-app/80 border border-theme rounded-xl p-5 shadow-sm backdrop-blur">
+            <div class="flex items-center justify-between mb-2">
+              <span id="ui-plan-title" class="text-xs font-bold uppercase tracking-wider text-muted">My visit plan</span>
+              <span id="planned-count-text" class="text-sm font-bold text-accent font-mono">0 / 6 added to your plan</span>
+            </div>
+
+            <!-- Progress Bar Container -->
+            <div class="w-full h-3 bg-surface border border-theme rounded-full overflow-hidden">
+              <div id="progress-bar-fill" class="progress-fill h-full rounded-full" style="width: 0%;"></div>
+            </div>
+
+            <p class="text-[11px] text-muted mt-2 text-right">Saved locally in your browser</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIH LIVE CROWD ALERT WIDGET CONTAINER -->
+      <div id="sih-crowd-alert-banner">
+        <!-- Populated dynamically by SIH-feature-crowd-alert.js -->
+      </div>
+
+      <!-- DISTRICT FILTER CHIPS COMPONENT -->
+      <section aria-label="District filters" class="space-y-3">
+        <h3 id="ui-filter-title" class="text-xs font-bold uppercase tracking-wider text-muted">
+          Filter by district
+        </h3>
+        <div id="district-chips-container" class="flex flex-wrap gap-2">
+          <!-- Rendered dynamically by planner.js -->
+        </div>
+      </section>
+
+      <!-- MONASTERY LIST COMPONENT -->
+      <section aria-label="Monastery collection">
+        <div id="monastery-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered dynamically by planner.js -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- PROFESSIONAL GOVERNMENT-GRADE PORTAL FOOTER -->
+    <footer class="gov-footer relative mt-16 pt-12 pb-8">
+      <div class="brand-stripe absolute top-0 left-0 right-0"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Column 1: Government Department Branding -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-accent text-surface flex items-center justify-center font-bold text-xl shadow">
+                ☸
+              </div>
+              <div>
+                <h3 id="ui-footer-dept" class="font-bold font-heading text-lg leading-tight">
+                  Tourism & Civil Aviation Department
+                </h3>
+                <p id="ui-footer-govt" class="text-xs font-semibold mt-0.5">
+                  Government of Sikkim • SIH 2026 (SIH25061)
+                </p>
+              </div>
+            </div>
+            <p class="text-xs leading-relaxed">
+              Official Buddhist monastery heritage & travel advisory portal designed to promote sustainable cultural tourism across Sikkim.
+            </p>
+          </div>
+
+          <!-- Column 2: Quick Tourism Portals -->
+          <div class="space-y-2">
+            <h4 id="ui-footer-quick" class="text-xs font-bold uppercase tracking-wider font-heading">
+              Quick Tourism Portals
+            </h4>
+            <ul class="text-xs space-y-1.5">
+              <li><a href="https://sikkimtourism.gov.in" target="_blank" rel="noopener" class="transition-colors">✦ <span id="ui-footer-permits">ILP / RAP Tourist Permits</span></a></li>
+              <li><a href="#" onclick="event.preventDefault()" class="transition-colors">✦ <span id="ui-footer-circuit">Buddhist Pilgrimage Circuit</span></a></li>
+              <li><a href="#" onclick="event.preventDefault()" class="transition-colors">✦ <span id="ui-footer-festivals">Sikkim Festival Calendar</span></a></li>
+              <li><a href="#" onclick="event.preventDefault()" class="transition-colors">✦ <span id="ui-footer-helpline">Emergency Tourist Helpline (1364)</span></a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Secretariat Contact -->
+          <div class="space-y-2">
+            <h4 id="ui-footer-contact" class="text-xs font-bold uppercase tracking-wider font-heading">
+              Secretariat Contact
+            </h4>
+            <div class="text-xs space-y-1">
+              <p id="ui-footer-address">📍 Paryatan Bhawan, Tadong, Gangtok - 737102</p>
+              <p id="ui-footer-toll">📞 Toll-Free Helpline: 1800-345-3377 / 03592-209090</p>
+              <p id="ui-footer-email">✉️ Email: contact@sikkimtourism.gov.in</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Copyright & Compliance Bar -->
+        <div class="pt-6 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
+          <p id="ui-footer-copy">© 2026 Tourism Department, Government of Sikkim. All Rights Reserved.</p>
+          <p id="ui-footer-note" class="text-center sm:text-right font-mono">SIH 2026 Problem Statement SIH25061 • All visitor crowd metrics are simulated estimates</p>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SLIDING DETAIL PANEL OVERLAY -->
+  <div id="panel-overlay" class="drawer-overlay" aria-hidden="true"></div>
+
+  <!-- SLIDING DETAIL PANEL COMPONENT -->
+  <aside 
+    id="panel-drawer" 
+    class="drawer-panel"
+    role="dialog" 
+    aria-modal="true" 
+    aria-label="Monastery details panel"
+  >
+    <!-- Top Brand Gradient Stripe -->
+    <div class="brand-stripe"></div>
+
+    <!-- Panel Header Bar -->
+    <div class="p-4 border-b border-theme flex items-center justify-between bg-surface/90 backdrop-blur">
+      <span class="text-xs font-semibold uppercase tracking-wider text-muted">Monastery details</span>
+      <button 
+        id="panel-close-btn"
+        type="button"
+        aria-label="Close detail panel"
+        class="p-2 rounded-lg border border-theme text-muted hover:text-main hover:border-accent transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Dynamic Panel Content Container -->
+    <div id="panel-content" class="flex-1 overflow-y-auto p-6 space-y-6">
+      <!-- Populated dynamically by panel.js -->
+    </div>
+  </aside>
+
+  <!-- APPLICATION SCRIPTS (LOAD ORDER IS STRICT) -->
+  <script src="js/translations.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/planner.js"></script>
+  <script src="js/panel.js"></script>
+  <script src="js/SIH-feature-crowd-alert.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
