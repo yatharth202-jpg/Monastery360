@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monastery360 — Sikkim's Living Heritage</title>
+<meta name="description" content="Digitize and showcase the monasteries of Sikkim for tourism and cultural preservation — SIH25061, Government of Sikkim.">
+<meta name="theme-color" content="#1F2A44">
+<link rel="manifest" href="manifest.json">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="brand"><span class="mark"></span> Monastery360</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#tour">Tour</a>
+    <a href="#archive">Monasteries</a>
+    <a href="#map">Map</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#economy">Homestays</a>
+    <a href="#preserve">Preserve</a>
+    <a href="#chatbot">Ask</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">SIH25061 · Government of Sikkim · Travel &amp; Tourism</span>
+    <h1>300 years of Himalayan heritage, <em>one pixel at a time.</em></h1>
+    <p class="lede">Monastery360 makes Sikkim's remote, ageing monasteries explorable, documented, and protected — for tourists who may never reach them, and for a heritage that is fading faster than it is being recorded.</p>
+    <div class="hero-cta">
+      <a href="#tour" class="btn btn-primary">Start the virtual tour</a>
+      <a href="#archive" class="btn btn-ghost">Explore the archive</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>200+</strong><span>monasteries across Sikkim</span></div>
+      <div><strong>1701</strong><span>oldest — Dubdi Monastery</span></div>
+      <div><strong>~75%</strong><span>moderately to highly remote</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CROWD ALERT ============ -->
+<div class="alert-banner" id="alertBanner">
+  <span id="alertText">Loading crowd advisory…</span>
+  <button id="alertDismiss">Dismiss</button>
+</div>
+
+<!-- ============ ROADMAP BADGE ============ -->
+<div class="roadmap">
+  <span class="icon">🗺️</span>
+  <div>
+    <h4>Honest data-sourcing roadmap</h4>
+    <p><strong>Digitized now:</strong> Rumtek, Pemayangtse, Tashiding, Dubdi, Phodong — sourced from Sikkim Tourism Dept., State Gazetteers, ASI and Wikipedia. <strong>Pending on-ground digitization:</strong> Labrang (restricted border permit) and Ralang. This platform marks incomplete coverage honestly instead of fabricating it.</p>
+  </div>
+</div>
+
+<div class="flagline" aria-hidden="true">
+  <svg viewBox="0 0 1200 46" preserveAspectRatio="none">
+    <line x1="0" y1="6" x2="1200" y2="6" stroke="#5B4A41" stroke-width="1.5"/>
+    <g id="flagRow"></g>
+  </svg>
+</div>
+
+<!-- ============ TOUR ============ -->
+<section class="section" id="tour">
+  <div class="section-head">
+    <span class="eyebrow">Core feature 01</span>
+    <h2>Walk through a monastery you may never physically reach</h2>
+    <p>An interactive 360° viewer plus a reference 3D model — the two-layer immersive stack that separates a real digitization pipeline from a static photo gallery.</p>
+  </div>
+  <div class="tour-grid">
+    <div class="pano-wrap">
+      <div id="panorama"></div>
+      <div class="pano-controls">
+        <button class="scene-btn active" data-scene="scene1">Prototype scene · Interior hall</button>
+        <button class="scene-btn" data-scene="scene2">Prototype scene · Courtyard view</button>
+      </div>
+      <p class="pano-note">⚠️ <strong>Honest labeling:</strong> these are demo equirectangular captures (Pannellum sample panoramas), standing in for the real on-site 360° photography that Phase 2 will capture at Rumtek and Pemayangtse with Sikkim Tourism Dept. permission — the engine, drag/zoom, and hotspot navigation are fully functional.</p>
+    </div>
+    <div class="card3d">
+      <iframe src="https://sketchfab.com/models/f7d682fec6d14bd5b1923cb5f396f5b5/embed" title="Reference Buddhist temple 3D model" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+      <div class="body">
+        <h4>3D reference model — heritage-decay layer</h4>
+        <p>A free, illustrative Buddhist-temple 3D model standing in for photogrammetry captures of murals and structures at risk (e.g. Phodong's fading murals, Pemayangtse's Zangdok Palri sculpture). Production build swaps this for drone/phone photogrammetry of the actual artifacts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHIVE ============ -->
+<section class="section" id="archive" style="background:var(--paper); border-radius:28px;">
+  <div class="section-head">
+    <span class="eyebrow">Core feature 02</span>
+    <h2>The digital heritage archive</h2>
+    <p>Founding year, sect, access difficulty and entry details for every documented monastery — closing the information gap described in the problem statement.</p>
+  </div>
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="Search by name or sect… try 'Kagyu' or 'Dubdi'" aria-label="Search monasteries">
+    <span class="search-meta" id="searchMeta"></span>
+  </div>
+  <div class="grid-cards" id="cardGrid"></div>
+</section>
+
+<!-- ============ MAP ============ -->
+<section class="section" id="map">
+  <div class="section-head">
+    <span class="eyebrow">Core feature 03</span>
+    <h2>Interactive geo-map with honest permit flags</h2>
+    <p>Every monastery pinned with real-world access reality — including which sites sit in restricted, permit-required zones near the international border. No other team building this problem statement is likely to flag this.</p>
+  </div>
+  <div id="leaflet-map"></div>
+  <div class="map-legend">
+    <span><span class="dot" style="background:var(--flag-green)"></span> Easy access</span>
+    <span><span class="dot" style="background:#c9973e"></span> Moderate / trek required</span>
+    <span><span class="dot" style="background:var(--flag-red)"></span> Restricted — permit required</span>
+  </div>
+</section>
+
+<!-- ============ CALENDAR ============ -->
+<section class="section" id="calendar" style="background:var(--dusk); border-radius:28px; color:var(--parchment);">
+  <div class="section-head">
+    <span class="eyebrow" style="color:var(--gold-light)">Core feature 04</span>
+    <h2 style="color:var(--paper)">Cultural calendar</h2>
+    <p style="color:rgba(251,246,234,0.75)">Plan a visit around Sikkim's living festival calendar rather than an empty building.</p>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+</section>
+
+<!-- ============ HOMESTAY / ECONOMY ============ -->
+<section class="section" id="economy">
+  <div class="section-head">
+    <span class="eyebrow">Core feature 05</span>
+    <h2>Local economy directory</h2>
+    <p>Connecting homestays, certified guides and artisans to visibility they currently don't have online.</p>
+  </div>
+  <div class="stay-grid" id="stayGrid"></div>
+</section>
+
+<!-- ============ SOUND ARCHIVE ============ -->
+<section class="section" style="background:var(--paper); border-radius:28px;">
+  <div class="section-head">
+    <span class="eyebrow">Core feature 06</span>
+    <h2>Sound &amp; oral heritage archive</h2>
+    <p>Chants, bells and ritual sound are as much at risk of being forgotten as murals. Two real, licensed recordings are wired up below; the full ritual-chant archive is a partnership roadmap item.</p>
+  </div>
+  <div class="sound-grid">
+    <div class="sound-card">
+      <h4>Tibetan singing bowl — struck &amp; friction tone</h4>
+      <audio controls src="https://commons.wikimedia.org/wiki/Special:FilePath/Small_tibetan_singing_bowl.ogg"></audio>
+      <p>Community recording, Wikimedia Commons · CC BY-SA 4.0</p>
+    </div>
+    <div class="sound-card">
+      <h4>Tibetan singing bowl — 4.5 inch, sustained tone</h4>
+      <audio controls src="https://commons.wikimedia.org/wiki/Special:FilePath/Tibetan_Singing_Bowl_4.5inch.flac"></audio>
+      <p>Community recording, Wikimedia Commons · CC BY-SA 4.0</p>
+    </div>
+    <div class="sound-card pending">🎙️ Monastery-specific chants &amp; ritual horns — pending recording partnership with monastery trusts</div>
+  </div>
+</section>
+
+<!-- ============ PRESERVE: ADOPT + DECAY + FINGERPRINT ============ -->
+<section class="section" id="preserve">
+  <div class="section-head">
+    <span class="eyebrow">Differentiator layer</span>
+    <h2>Preserve &amp; protect — the trust &amp; safety layer</h2>
+    <p>This is the part almost no competing team builds: a transparent funding ledger, a citizen preservation watch, and real digital fingerprinting for artifact provenance — reframing decay reporting and fingerprinting explicitly as heritage security.</p>
+  </div>
+
+  <div class="two-up">
+    <!-- ADOPT A ARTIFACT -->
+    <div class="panel">
+      <h3 style="font-size:1.2rem;">Adopt-a-Artifact — transparent preservation ledger</h3>
+      <p class="small-note">Each pledge is chained to the previous one's hash (SHA-256), so any tampering with past entries is instantly detectable — a lightweight, honest stand-in for a real blockchain ledger.</p>
+      <form id="adoptForm">
+        <div class="form-row">
+          <label for="adoptName">Your name</label>
+          <input type="text" id="adoptName" required placeholder="e.g. Anjali Sharma">
+        </div>
+        <div class="form-row">
+          <label for="adoptArtifact">Artifact you're supporting</label>
+          <select id="adoptArtifact" required>
+            <option value="">Select an artifact…</option>
+            <option>Zangdok Palri wooden sculpture — Pemayangtse</option>
+            <option>Fading wall murals — Phodong</option>
+            <option>Ageing manuscripts — Tashiding</option>
+            <option>Karmapa's throne &amp; relics — Rumtek</option>
+            <option>Original wooden structure — Dubdi</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="adoptNote">Note (optional)</label>
+          <input type="text" id="adoptNote" placeholder="Why this artifact matters to you">
+        </div>
+        <button type="submit" class="btn btn-primary">Record pledge</button>
+        <button type="button" id="verifyChain" class="btn btn-outline">Verify chain integrity</button>
+      </form>
+      <div id="adoptConfirm" class="confirm-msg"></div>
+      <div id="chainStatus"></div>
+      <div class="ledger" id="pledgeLedger"></div>
+    </div>
+
+    <!-- DECAY REPORT -->
+    <div class="panel">
+      <h3 style="font-size:1.2rem;">Citizen Preservation Watch</h3>
+      <p class="small-note">Locals and tourists become the eyes protecting the site — report cracks, leaks, or fading paint the moment they're spotted, instead of waiting for a scheduled inspection.</p>
+      <form id="decayForm">
+        <div class="form-row">
+          <label for="decayMonastery">Monastery</label>
+          <select id="decayMonastery" required>
+            <option value="">Select monastery…</option>
+            <option>Rumtek</option><option>Pemayangtse</option><option>Tashiding</option>
+            <option>Dubdi</option><option>Phodong</option><option>Labrang</option><option>Ralang</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="decayDesc">What did you notice?</label>
+          <textarea id="decayDesc" required placeholder="e.g. Water seepage on the eastern mural wall"></textarea>
+        </div>
+        <div class="form-row">
+          <label for="decayPhoto">Photo (filename referenced for this demo)</label>
+          <input type="file" id="decayPhoto" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit report</button>
+      </form>
+      <div id="decayConfirm" class="confirm-msg"></div>
+      <div class="ledger" id="decayList"></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:2rem;">
+    <h3 style="font-size:1.2rem;">Digital fingerprinting — artifact anti-theft &amp; provenance</h3>
+    <p class="small-note">Upload a photo of an artifact to generate a genuine SHA-256 perceptual-style fingerprint, computed live in your browser (Web Crypto API — no server, no upload). Registering a fingerprint creates a provenance record; re-checking a photo against the registry demonstrates how tampering or substitution would be caught.</p>
+    <div class="two-up">
+      <div>
+        <div class="fp-drop" id="fpDrop">📷 Click to choose an artifact photo, or drag one here</div>
+        <input type="file" id="fpFile" accept="image/*" style="display:none;">
+        <div class="form-row" style="margin-top:1rem;">
+          <label for="fpLabel">Artifact label</label>
+          <input type="text" id="fpLabel" placeholder="e.g. Thangka painting, Tashiding — north wall">
+        </div>
+        <button id="fpRegister" class="btn btn-primary" disabled>Register fingerprint</button>
+        <div id="fpHashOut" class="fp-hash" style="display:none;"></div>
+      </div>
+      <div>
+        <h4 style="font-size:0.95rem; color:var(--maroon-dark); margin-bottom:0.6em;">Provenance registry</h4>
+        <div class="fp-list" id="fpList"><span class="small-note">No fingerprints registered yet.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHATBOT ============ -->
+<section class="section" id="chatbot" style="background:var(--paper); border-radius:28px;">
+  <div class="section-head">
+    <span class="eyebrow">AI Q&amp;A</span>
+    <h2>Ask Monastery360</h2>
+    <p><strong>Honest disclosure:</strong> this is a lightweight, keyword-matched assistant — not a live language model. It answers from a fixed set of common visitor questions.</p>
+  </div>
+  <div class="chat-window">
+    <div class="chat-head"><span class="dot-live"></span> Monastery360 Assistant · keyword-based, not a live AI model</div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chips" id="chatChips"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Ask about timings, fees, permits, festivals…" aria-label="Ask a question">
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <h5>Monastery360</h5>
+      <p style="max-width:340px; font-size:0.86rem; color:rgba(251,246,234,0.65);">A digital heritage platform for SIH25061 — Digitize and Showcase Monasteries of Sikkim for Tourism and Cultural Preservation, Government of Sikkim. Built zero-cost, offline-first by design.</p>
+    </div>
+    <div>
+      <h5>Platform</h5>
+      <a href="#tour">Virtual tour</a>
+      <a href="#archive">Monastery archive</a>
+      <a href="#map">Geo-map</a>
+      <a href="#preserve">Preservation tools</a>
+    </div>
+    <div>
+      <h5>Sustainability model</h5>
+      <p style="font-size:0.82rem; color:rgba(251,246,234,0.6);">Government partnership · tourism revenue share · Adopt-a-Artifact micro-donations. Offline/PWA mode and satellite/IoT monitoring are roadmap items, not overclaimed as built.</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>SIH25061 · Government of Sikkim · Travel &amp; Tourism · Software</span>
+    <span>"Preserving a 300-year-old heritage, one pixel at a time."</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
