@@ -1,0 +1,126 @@
+/* Monastery360 - 3D Glassmorphism & Theme Stylesheet */
+
+:root {
+  --bg-primary: #0B0C10;
+  --text-primary: #FAF7F2;
+  --monastery-maroon: #4A0E17;
+  --monastery-gold: #F3B23E;
+  --monastery-turquoise: #16656E;
+  --monastery-cream: #FAF7F2;
+}
+
+body.light-mode {
+  --bg-primary: #F6F3EC;
+  --text-primary: #0B0C10;
+  --monastery-maroon: #5B0E17;
+  --monastery-gold: #965C00;
+  --monastery-turquoise: #0F5C6E;
+  --monastery-cream: #0B0C10;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+.font-serif-title {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+}
+
+/* International Buddhist Flag 5-Color Ribbon */
+.buddhist-flag-ribbon {
+  background: linear-gradient(90deg, 
+    #003DA5 0%, #003DA5 20%, 
+    #FFD100 20%, #FFD100 40%, 
+    #D92525 40%, #D92525 60%, 
+    #FFFFFF 60%, #FFFFFF 80%, 
+    #FF6600 80%, #FF6600 100%
+  );
+  box-shadow: 0 0 15px rgba(255, 209, 0, 0.5);
+  height: 6px;
+  width: 100%;
+}
+
+.buddhist-flag-corner-badge {
+  background: linear-gradient(135deg, #003DA5 0%, #FFD100 25%, #D92525 50%, #FFFFFF 75%, #FF6600 100%);
+  box-shadow: 0 0 20px rgba(255, 209, 0, 0.6);
+}
+
+/* 3D Tourism Background */
+.bg-tourism-3d-fit {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0B0C10;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(243, 178, 62, 0.16) 0%, transparent 65%),
+    radial-gradient(circle at 85% 30%, rgba(22, 101, 110, 0.2) 0%, transparent 55%),
+    radial-gradient(circle at 15% 70%, rgba(74, 14, 23, 0.22) 0%, transparent 55%),
+    url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=1920');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+}
+
+body.light-mode .bg-tourism-3d-fit {
+  background-color: #F6F3EC;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(243, 178, 62, 0.25) 0%, transparent 65%),
+    radial-gradient(circle at 85% 30%, rgba(22, 101, 110, 0.15) 0%, transparent 55%),
+    radial-gradient(circle at 15% 70%, rgba(74, 14, 23, 0.1) 0%, transparent 55%),
+    url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=1920');
+  background-blend-mode: soft-light;
+}
+
+/* 3D Glass Panels & Cards */
+.glass-3d-panel {
+  background: rgba(24, 26, 38, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(243, 178, 62, 0.35);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+  border-radius: 1.5rem;
+}
+
+body.light-mode .glass-3d-panel {
+  background: rgba(255, 255, 255, 0.98);
+  color: #0B0C10 !important;
+  border: 1.5px solid rgba(160, 74, 42, 0.4);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.12);
+}
+
+.glass-3d-card {
+  background: rgba(28, 30, 44, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid rgba(243, 178, 62, 0.28);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6);
+  border-radius: 1.5rem;
+  transition: all 0.35s ease;
+}
+
+.glass-3d-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(243, 178, 62, 0.85);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
+}
+
+body.light-mode .glass-3d-card {
+  background: rgba(255, 255, 255, 0.98);
+  color: #0B0C10 !important;
+  border: 1.5px solid rgba(160, 74, 42, 0.35);
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Universal Hover Lift Effect */
+.hover-3d-lift {
+  transition: all 0.25s ease;
+}
+.hover-3d-lift:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 28px -5px rgba(243, 178, 62, 0.45);
+}
